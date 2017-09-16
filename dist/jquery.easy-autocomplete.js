@@ -1183,7 +1183,7 @@ var EasyAutocomplete = (function (scope) {
       }
 
       function escapeRegExp(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&").replace(/\s\s+/g, ' ').trim();
       }
 
       function highlightPhrase(string, phrase) {
@@ -1194,7 +1194,8 @@ var EasyAutocomplete = (function (scope) {
         })
         string = string + '';
         for (var i in phrase) {
-          string = string.replace(new RegExp("(" + phrase[i] + ")", "gi"), "<b>$1</b>");
+          if (phrase[i])
+            string = string.replace(new RegExp("(" + phrase[i] + ")", "gi"), "<b>$1</b>");
         }
         return string;
       }
